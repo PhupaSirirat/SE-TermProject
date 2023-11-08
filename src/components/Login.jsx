@@ -37,15 +37,17 @@ function App() {
           </button>
         </form>
 
-        <div className="flex items-center py-4">
+        <div className="flex items-center py-4 mt-4">
           <div className="flex-grow h-px bg-[#FF4E00]"></div>
           <span className="flex-shrink text-sm text-[#FF4E00] px-4 italic font-light">
-            หรือ หากไม่มีบัญชี
+            หากไม่มีบัญชี
           </span>
           <div className="flex-grow h-px bg-[#FF4E00]"></div>
         </div>
         <div className="flex justify-center">
-          <Link to="#"><span>ลงทะเบียน</span></Link>
+          <Link to="#">
+            <span>ลงทะเบียน</span>
+          </Link>
         </div>
       </section>
     </main>
