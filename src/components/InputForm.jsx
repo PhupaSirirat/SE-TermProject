@@ -11,7 +11,7 @@ const inputForm = tv({
 const { base, input } = inputForm();
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
-export function InputForm({label, type, id, placeholder}) {
+export function InputForm({label, type, id, placeholder, hint}) {
 
   return (
     <>
@@ -26,6 +26,9 @@ export function InputForm({label, type, id, placeholder}) {
           placeholder={placeholder}
           required
         />
+        <label className="block mb-2 text-xs font-medium text-gray-900 ">
+          {hint}
+        </label>
       </div>
     </>
   );
