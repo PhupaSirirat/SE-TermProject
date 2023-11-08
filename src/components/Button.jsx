@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import { tv } from "tailwind-variants";
 
 const InputButton = tv({
   slots: {
     button:
-      "text-[#780000] font-bold px-6 py-2 rounded-md border border-solid border-orange-500 bg-white shadow-md",
+      "w-full text-[#780000] font-bold px-6 py-2 rounded-md border border-solid border-orange-500 bg-white shadow-md",
   },
 });
 
