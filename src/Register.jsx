@@ -24,7 +24,7 @@ export default function Login() {
             placeholder="name@email.com"
           />
           <InputForm label="รหัสผ่าน" type="password" id="password" hint="รหัสผ่านต้องมีความยาวอย่างน้อย 8 อักษร"/>
-          <InputForm label="ยืนยันรหัสผ่าน" type="confirmpassword" id="confirmpassword" />
+          <InputForm label="ยืนยันรหัสผ่าน" type="password" id="confirmpassword" />
           <Button label="ลงชื่อเข้าใช้" type="submit" />
         </form>
 
