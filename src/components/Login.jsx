@@ -53,7 +53,7 @@ export default function Login() {
           </span>
           <div className="flex-grow h-px bg-[#FF4E00]"></div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center text-lg">
           <Link to="#">
             <span>ลงทะเบียน</span>
           </Link>
