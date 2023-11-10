@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
 import { tv } from "tailwind-variants";
 
 const InputButton = tv({
