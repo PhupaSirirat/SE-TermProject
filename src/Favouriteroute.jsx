@@ -1,8 +1,5 @@
 import { tv } from "tailwind-variants";
-import { InputForm } from "./components/InputForm";
-import { Button } from "./components/Button";
-import React, { useState } from 'react';
-
+import { useState } from 'react';
 
 const FavouriteroutePage = tv({
     slots: {
