@@ -1,4 +1,5 @@
 const User = require("../models/userModel.js");
+const Favourite = require("../models/favouriteModel.js");
 const SearchHistory = require("../models/searchHistoryModel.js"); // import Favourite model
 
 const addSearchHistory = async (req, res) => {
@@ -82,7 +83,8 @@ const addFavoriteFromHistory = async (req, res) => {
         }
 
         // Create a new favorite based on the search history item
-        const newFavorite = await Favourite.create({ 
+        const newFavorite = await Favourite.create({
+            user: userId,
             from: searchHistoryItem.from, 
             to: searchHistoryItem.to 
         });

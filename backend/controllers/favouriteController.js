@@ -7,7 +7,7 @@ const addFavorite = async (req, res) => {
         const { from, to } = req.body;
 
         // Create a new favourite item
-        const newFavourite = await Favourite.create({ from, to });
+        const newFavourite = await Favourite.create({ user: userId, from, to });
 
         // Add this new favourite item's ID to the user's favourites
         await User.findByIdAndUpdate(
