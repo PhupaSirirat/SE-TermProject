@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     }],
     searchHistory: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "SearchHistory"
+        ref: "History"
     }]
 });
 
