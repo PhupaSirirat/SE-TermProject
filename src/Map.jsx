@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import {
   useJsApiLoader,
   GoogleMap,
-  Marker,
   Autocomplete,
   DirectionsRenderer,
 } from "@react-google-maps/api";
@@ -17,9 +16,10 @@ const center = {
 const libraries = ["places"];
 
 export default function Map() {
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: `${import.meta.env.VITE_APP_GOOGLE_API}`,
+    googleMapsApiKey: `${import.meta.env.VITE_APP_GOOGLE_API_KEY}`,
     libraries,
   });
 
@@ -106,7 +106,7 @@ export default function Map() {
       <section className="">
         <GoogleMap
           center={center}
-          zoom={5}
+          zoom={12}
           mapContainerStyle={{ width: "100%", height: "100vh" }}
           options={{
             zoomControl: false,
@@ -116,7 +116,6 @@ export default function Map() {
           }}
           onLoad={(map) => setMap(map)}
         >
-          <Marker position={center} />
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}

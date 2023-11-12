@@ -16,7 +16,7 @@ export default function Home() {
     <main className={base()}>
       <h1 className={headerText()}>หน้าหลัก</h1>
       <section className="w-4/5 flex flex-col gap-10 items-center">
-        <Link to="/routefinder" className="w-full">
+        <Link to="/map" className="w-full">
           <Button label="กำหนดเส้นทาง" />
         </Link>
         <Link to="/favouriteroute" className="w-full">
