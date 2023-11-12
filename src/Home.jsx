@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
 import { tv } from "tailwind-variants";
-import { InputForm } from "./components/InputForm";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { Button } from "./components/Button";
+import { useEffect } from 'react';
 
 const HomePage = tv({
   slots: {
@@ -13,6 +15,20 @@ const HomePage = tv({
 const { base, headerText } = HomePage();
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:3000/api/users/logout', 
+      {},
+      { withCredentials: true });
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed', error);
+      // Handle error appropriately
+    }
+  };
+
   return (
     <main className={base()}>
       <h1 className={headerText()}>หน้าหลัก</h1>
@@ -30,7 +46,10 @@ export default function Home() {
 
       <Link to="/">
         <div className="mt-44">
-          <Button label="ออกจากระบบ" />
+          <Button 
+            label="ออกจากระบบ" 
+            func = {handleLogout}/>
+            
         </div>
       </Link>
     </main>

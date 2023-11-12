@@ -10,13 +10,17 @@ const InputButton = tv({
 
 const { button } = InputButton();
 
-export function Button({ label, type, className }) {
+export function Button({ label, type, className, func }) {
   // label -> string in the button
   // type -> type of button
   // className -> Can override the current button class
   return (
     <>
-      <button type={type} className={button({class : `${className}`})}>
+      <button 
+        type={type} 
+        className={button({class : `${className}`})} 
+        onClick={func}>
+          
         {label}
       </button>
     </>
