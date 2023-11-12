@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { tv } from "tailwind-variants";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,38 +15,50 @@ const RegisterPage = tv({
 const { base, headerText } = RegisterPage();
 
 export default function Register() {
-  const [identifier, setIdentifier] = useState('');
-  const [password, setPassword] = useState('');
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    try {
-      const response = await axios.post('http://localhost:3000/api/users/register', {
-        identifier,
-        password,
-      }, {
-        headers: {
-          "Content-Type": 'application/json'
-        }
-      });
 
-      alert('Register successful!');
-      navigate('/');
+    try {
+      if (password === confirmPassword) {
+        const response = await axios.post(
+          "http://localhost:3000/api/users/register",
+          {
+            identifier,
+            password,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        alert("Register successful!");
+        navigate("/");
+      }
+      else {
+        alert("Password and Confirm Password is mismatch")
+      }
     } catch (error) {
       // console.log("identifier : "+identifier)
       // console.log("password : "+password)
       if (error.response) {
         // The server responded with a status code outside the 2xx range
-        const errorMessage = error.response.data.message || 'An unknown error occurred';
+        const errorMessage = error.response.data.message || "Wrong phone number/email";
+
         alert(`Register failed: ${errorMessage}`);
       } else if (error.request) {
         // The request was made, but no response was received
-        alert('Register failed: No response from server');
+        alert("Register failed: No response from server");
       } else {
         // An error occurred in setting up the request
-        alert('Register failed: Error in sending request');
+        alert("Register failed: Error in sending request");
       }
     }
   };
@@ -61,21 +73,24 @@ export default function Register() {
               label="หมายเลขโทรศัพท์/อีเมล์"
               id="username"
               placeholder="name@email.com"
-              value= {identifier}
-              func = {(e) => setIdentifier(e.target.value)}
+              value={identifier}
+              func={(e) => setIdentifier(e.target.value)}
             />
-            <InputForm 
-              label="รหัสผ่าน" 
-              type="password" 
-              id="password" 
-              hint="รหัสผ่านต้องมีความยาวอย่างน้อย 8 อักษร" />
-            <InputForm 
-              label="ยืนยันรหัสผ่าน" 
-              type="password" 
-              id="confirmpassword" 
-              value = {password}
-              func = {(e) => setPassword(e.target.value)}
-              />
+            <InputForm
+              label="รหัสผ่าน"
+              type="password"
+              id="password"
+              hint="รหัสผ่านต้องมีความยาวอย่างน้อย 8 อักษร"
+              value={password}
+              func={(e) => setPassword(e.target.value)}
+            />
+            <InputForm
+              label="ยืนยันรหัสผ่าน"
+              type="password"
+              id="confirmpassword"
+              value={confirmPassword}
+              func={(e) => setConfirmPassword(e.target.value)}
+            />
             <Button label="ลงชื่อเข้าใช้" type="submit" />
           </form>
 
