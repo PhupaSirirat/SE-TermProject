@@ -6,6 +6,7 @@ import Routefinder from "./Routefinder";
 import Home from "./Home";
 import Favouriteroute from "./Favouriteroute";
 import History from "./History";
+import Map from "./Map";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/history", 
     element: <History />, 
+  },
+  {
+    path: "/map", 
+    element: <Map />, 
   },
 ]);
 
