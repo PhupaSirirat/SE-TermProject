@@ -23,7 +23,7 @@ export default function Home() {
         <Link to="/favouriteroute" className="w-full">
           <Button label="เส้นทางที่บันทึก" />
         </Link>
-        <Link to="#" className="w-full">
+        <Link to="/history" className="w-full">
           <Button label="ประวัติการเดินทาง" />
         </Link>
       </section>

@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel.js");
+const Favourite = require("../models/favouriteModel.js"); // import Favourite model
 
 const userRegister = async (req, res) => {
     try {
@@ -83,13 +84,15 @@ const userLogin = async (req, res) => {
                 }
             );
 
-            res.cookie(token)
-            // user.token = token;
+            // Set token as a cookie in the response
+            res.cookie('token', token, { httpOnly: true, maxAge: 2 * 60 * 60 * 1000 }); // 2 hours in milliseconds
 
             // Do not send back the password
             const userResponse = { ...user.toObject() };
-            delete userResponse.password;
-            delete userResponse.__v; // Remove version key
+
+            // Not sure what this for.
+            // delete userResponse.password;
+            // delete userResponse.__v; // Remove version key
 
             res.status(200).json(userResponse);
 
@@ -102,7 +105,19 @@ const userLogin = async (req, res) => {
     }
 };
 
+const userLogout = async (req, res) => {
+    try {
+        // Clear the authentication cookie
+        res.clearCookie('token');
+        res.status(200).send('User logged out successfully');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+};
+
 module.exports = {
     userRegister,
     userLogin,
+    userLogout,
 }
