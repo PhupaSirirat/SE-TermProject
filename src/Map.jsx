@@ -7,6 +7,17 @@ import {
 } from "@react-google-maps/api";
 import { Button } from "./components/Button";
 import { Link } from "react-router-dom";
+import { tv } from "tailwind-variants";
+
+const MapPage = tv({
+  slots: {
+    base: "relative h-screen overflow-hidden",
+    input: "w-40 rounded-md p-0.5 pl-1.5",
+    newbutton: "border-2 border-black rounded-md p-0.5",
+  },
+});
+
+const { base, input, newbutton } = MapPage(); 
 
 const center = {
   lat: 13.739415037890979,
@@ -16,7 +27,6 @@ const center = {
 const libraries = ["places"];
 
 export default function Map() {
-
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: `${import.meta.env.VITE_APP_GOOGLE_API_KEY}`,
@@ -49,19 +59,19 @@ export default function Map() {
   }
 
   return isLoaded ? (
-    <main className="h-screen overflow-hidden">
-      <Link to="/home" className="absolute z-10 top-16 left-16">
-        <Button label={"กลับ"} />
+    <main className={base()}>
+      <Link to="/home" className="absolute z-10 top-5 left-5">
+        <Button label={"กลับ"} className={"px-2 py-1"} />
       </Link>
-      <section className="searchbox">
+      <section className="w-1/2 h-fit bg-white absolute left-1/2 -translate-x-1/2 top-5 z-10 rounded-lg border border-black grid items-center p-4">
         <div className="flex flex-col">
-          <section className="flex justify-center gap-4">
+          <section className="flex flex-col justify-center gap-4">
             <div className="">
               <Autocomplete>
                 <input
                   type="text"
                   name="Origin"
-                  className="form-control"
+                  className={input()}
                   placeholder="Origin"
                   ref={originRef}
                 />
@@ -72,19 +82,19 @@ export default function Map() {
                 <input
                   type="text"
                   name="Destication"
-                  className="form-control"
+                  className={input()}
                   placeholder="Destication"
                   ref={destiantionRef}
                 />
               </Autocomplete>
             </div>
           </section>
-          <section className="flex justify-center gap-40 mt-2">
+          <section className="flex justify-center gap-5 mt-2">
             <div className="">
               <button
                 type="submit"
                 name="submit"
-                className="border-2 border-black"
+                className={newbutton()}
                 onClick={calculateRoute}
               >
                 Search
@@ -94,7 +104,7 @@ export default function Map() {
               <button
                 type="submit"
                 name="clear"
-                className="border-2 border-black"
+                className={newbutton()}
                 onClick={clearRoute}
               >
                 Clear
