@@ -33,13 +33,11 @@ export default function Login() {
         }
       });
 
-      // setCookies('token', response.data.token, { path: '/' });
-
       alert('Login successful!');
       navigate('/home');
     } catch (error) {
-      console.log("identifier : "+identifier)
-      console.log("password : "+password)
+      // console.log("identifier : "+identifier)
+      // console.log("password : "+password)
       if (error.response) {
         // The server responded with a status code outside the 2xx range
         const errorMessage = error.response.data.message || 'An unknown error occurred';
@@ -53,6 +51,7 @@ export default function Login() {
       }
     }
   };
+
   return (
     <main className={base()}>
       <h1 className={headerText()}>ลงชื่อเข้าใช้</h1>
