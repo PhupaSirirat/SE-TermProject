@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
 import { tv } from "tailwind-variants";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from "./components/Button";
-import { useEffect } from 'react';
 
 const HomePage = tv({
   slots: {
