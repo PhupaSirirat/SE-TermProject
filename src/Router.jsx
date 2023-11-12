@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Login from './Login';
 import Register from './Register';
-import Routefinder from "./Routefinder";
 import Home from "./Home";
 import Favouriteroute from "./Favouriteroute";
 import History from "./History";
@@ -20,10 +19,6 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <Home />,
-  },
-  {
-    path: "/routefinder",
-    element: <Routefinder />,
   },
   {
     path: "/favouriteroute", 
