@@ -24,7 +24,7 @@ export default function Login() {
     event.preventDefault();
   
     try {
-      const response = await axios.post('http://localhost:3000/api/users/login', {
+      const response = await axios.post('https://se-term-project.onrender.com/api/users/login', {
         identifier,
         password,
       }, {

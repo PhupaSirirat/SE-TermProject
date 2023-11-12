@@ -17,7 +17,7 @@ export default function Home() {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:3000/api/users/logout', 
+      await axios.post('https://se-term-project.onrender.com/api/users/logout', 
       {},
       { withCredentials: true });
       navigate('/');

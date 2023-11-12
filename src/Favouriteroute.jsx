@@ -23,7 +23,7 @@ export default function Favouriteroute() {
   const fetchFavourites = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/favourite/list",
+        "https://se-term-project.onrender.com/api/favourite/list",
         { withCredentials: true }
       );
       setFavourites(response.data);
@@ -40,7 +40,7 @@ export default function Favouriteroute() {
   const deleteFavorites = async (itemId) => {
     try {
       await axios.post(
-        "http://localhost:3000/api/favourite/delete",
+        "https://se-term-project.onrender.com/api/favourite/delete",
         { itemId: itemId },
         { withCredentials: true }
       );

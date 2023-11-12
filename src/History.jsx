@@ -20,7 +20,7 @@ export default function History() {
   const fetchHistory = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/history/list",
+        "https://se-term-project.onrender.com/api/history/list",
         { withCredentials: true }
       );
       setHistory(response.data); // Assuming the response contains the history data
@@ -38,7 +38,7 @@ export default function History() {
   const addToFavorites = async (searchHistoryId) => {
     try {
       await axios.post(
-        "http://localhost:3000/api/history/addtofav",
+        "https://se-term-project.onrender.com/api/history/addtofav",
         { searchHistoryId: searchHistoryId },
         { withCredentials: true },
         
