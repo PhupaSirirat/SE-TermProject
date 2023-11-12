@@ -56,7 +56,7 @@ export default function Login() {
   return (
     <main className={base()}>
       <h1 className={headerText()}>ลงชื่อเข้าใช้</h1>
-      <div className="w-full h-full flex justify-center items-center bg-white rounded-tl-2xl rounded-tr-2xl">
+      <div className="w-full h-full flex justify-center bg-white rounded-tl-2xl rounded-tr-2xl">
         <section className="w-4/5 py-6">
           <form className="flex flex-col" onSubmit={handleSubmit}>
             <InputForm
