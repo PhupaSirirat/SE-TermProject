@@ -58,13 +58,20 @@ export default function Login() {
       <h1 className={headerText()}>ลงชื่อเข้าใช้</h1>
       <div className="w-full h-full flex justify-center items-center bg-white rounded-tl-2xl rounded-tr-2xl">
         <section className="w-4/5 py-6">
-          <form className="flex flex-col">
+          <form className="flex flex-col" onSubmit={handleSubmit}>
             <InputForm
               label="หมายเลขโทรศัพท์/อีเมล"
               id="username"
               placeholder="name@email.com"
+              value = {identifier}
+              func = {(e) => setIdentifier(e.target.value)}
             />
-            <InputForm label="รหัสผ่าน" type="password" id="password" />
+            <InputForm 
+              label="รหัสผ่าน" 
+              type="password" 
+              id="password"
+              value = {password}
+              func = {(e) => setPassword(e.target.value)} />
             <Button label="ลงชื่อเข้าใช้" type="submit" />
           </form>
 
