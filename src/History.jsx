@@ -25,7 +25,7 @@ export default function History() {
             {placeholderroute.map((data, index) => (
               <tr key={index}>
                 <td className="border border-gray-500 p-2 font-normal text-sm text-center px-1 py-1">{data.start}</td>
-                <td className="border border-gray-500 p-2 font-normal text-sm text-center px-1 py-1">></td>
+                <td className="border border-gray-500 p-2 font-normal text-sm text-center px-1 py-1">{'>'}</td>
                 <td className="border border-gray-500 p-2 font-normal text-sm text-center px-1 py-1">{data.destination}</td>
                 <td className="border border-gray-500 p-2 font-normal text-sm text-center px-1 py-1">{data.cost}฿</td>
                 <td className="border border-gray-500 p-2 font-normal text-sm text-center px-1 py-1"><Button label={"เก็บ"} className={"px-1 py-1"} /></td>
