@@ -24,8 +24,7 @@ export default function History() {
         { withCredentials: true }
       );
       setHistory(response.data); // Assuming the response contains the history data
-      // console.log(response.data);
-      // console.log("history : "+history);
+      
     } catch (error) {
       console.error("Error fetching history:", error);
       // Handle error appropriately
