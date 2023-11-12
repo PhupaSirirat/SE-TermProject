@@ -24,8 +24,8 @@ export default function History() {
         { withCredentials: true }
       );
       setHistory(response.data); // Assuming the response contains the history data
-      console.log(response.data);
-      console.log("history : "+history);
+      // console.log(response.data);
+      // console.log("history : "+history);
     } catch (error) {
       console.error("Error fetching history:", error);
       // Handle error appropriately
@@ -36,6 +36,22 @@ export default function History() {
     fetchHistory();
   }, []);
 
+  const addToFavorites = async (searchHistoryId) => {
+    try {
+      await axios.post(
+        "http://localhost:3000/api/history/addtofav",
+        { searchHistoryId: searchHistoryId },
+        { withCredentials: true },
+        
+      );
+      alert('Added to favorites!');
+      // Optionally, refresh the data or update the UI to reflect the change
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+      alert('Failed to add to favorites.');
+    }
+  };
+  
   return (
     <main className={base()}>
       <h1 className={headerText()}>เส้นทางที่บันทึก</h1>
@@ -46,16 +62,20 @@ export default function History() {
           <Button label={"บันทึก"} className={"px-2 py-1"} />
         </div>
       </section>
-      {history.map((hist) => {
-        <section className="flex justify-between items-center w-4/5 space-x-4">
-          <span className="text-lg font-semibold">{hist.from}</span>
-          <span className="text-lg font-semibold">{hist.to}</span>
-          <div className="flex items-center gap-3">
-            <p>5บาท</p>
-            <Button label={"บันทึก"} className={"px-2 py-1"} />
-          </div>
-        </section>;
-      })}
+    {history.map((hist, index) => (
+      <section key={index} className="flex justify-between items-center w-4/5 space-x-4">
+        <span className="text-lg font-semibold">{hist.from}</span>
+        <span className="text-lg font-semibold">{hist.to}</span>
+        <div className="flex items-center gap-3">
+          <p>5บาท</p>
+          <Button
+            label={"บันทึก"}
+            className={"px-2 py-1"}
+            func={() => addToFavorites(hist._id)}
+          />
+        </div>
+      </section>
+    ))}
       <Link to={"/home"}>
         <Button label={"กลับไปหน้าหลัก"} />
       </Link>

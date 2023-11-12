@@ -19,7 +19,9 @@ export default function Home() {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:3000/api/users/logout', { withCredentials: true });
+      await axios.post('http://localhost:3000/api/users/logout', 
+      {},
+      { withCredentials: true });
       navigate('/');
     } catch (error) {
       console.error('Logout failed', error);
@@ -43,8 +45,11 @@ export default function Home() {
       </section>
 
       <Link to="/">
-        <div className="mt-44" onClick={handleLogout}>
-          <Button label="ออกจากระบบ" />
+        <div className="mt-44">
+          <Button 
+            label="ออกจากระบบ" 
+            func = {handleLogout}/>
+            
         </div>
       </Link>
     </main>
