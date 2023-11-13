@@ -27,12 +27,14 @@ export default function Login() {
       const response = await axios.post('https://se-term-project.onrender.com/api/users/login', {
         identifier,
         password,
-      }, {
-        headers: {
-          "Content-Type": 'application/json'
-        },
-        withCredentials: true
       });
+
+      const token = response.headers['x-auth-token'];
+      
+      if (token) {
+        // Store the token in sessionStorage
+        sessionStorage.setItem('token', token);
+      }
 
       alert('Login successful!');
       navigate('/home');
@@ -76,11 +78,11 @@ export default function Login() {
           </form>
 
           <div className="flex items-center py-4 mt-4">
-            <div className="flex-grow h-px bg-[#FF4E00]"></div>
-            <span className="flex-shrink text-sm text-[#FF4E00] px-4 italic font-light">
+            <div className="flex-grow h-px bg-primary"></div>
+            <span className="flex-shrink text-sm text-primary px-4 italic font-light">
               หากไม่มีบัญชี
             </span>
-            <div className="flex-grow h-px bg-[#FF4E00]"></div>
+            <div className="flex-grow h-px bg-primary"></div>
           </div>
           <div className="flex justify-center">
             <Link to="/register">
