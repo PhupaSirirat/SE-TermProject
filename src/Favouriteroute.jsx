@@ -57,7 +57,7 @@ export default function Favouriteroute() {
     <main className={base()}>
       <h1 className={headerText()}>เส้นทางที่บันทึก</h1>
       {favourites.map((favourite) => (
-        <section className="flex justify-center items-center w-4/5 space-x-4">
+        <section key={favourite._id} className="flex justify-center items-center w-4/5 space-x-4">
           <span className="text-lg font-semibold">{favourite.from}</span>
           <span className="text-lg font-semibold">{favourite.to}</span>{" "}
           <button className={button()}>ใช้</button>
