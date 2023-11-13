@@ -6,8 +6,8 @@ import { Button } from "./components/Button";
 
 const HistoryPage = tv({
   slots: {
-    base: "flex flex-col h-screen items-center pt-10 bg-[#fee4c8]",
-    headerText: "text-4xl font-bold mb-10",
+    base: "flex flex-col h-screen items-center pt-5",
+    headerText: "text-4xl font-bold mb-5",
   },
 });
 
