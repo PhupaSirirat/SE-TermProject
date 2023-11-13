@@ -27,12 +27,14 @@ export default function Login() {
       const response = await axios.post('https://se-term-project.onrender.com/api/users/login', {
         identifier,
         password,
-      }, {
-        headers: {
-          "Content-Type": 'application/json'
-        },
-        withCredentials: true
       });
+
+      const token = response.headers['x-auth-token'];
+      
+      if (token) {
+        // Store the token in sessionStorage
+        sessionStorage.setItem('token', token);
+      }
 
       alert('Login successful!');
       navigate('/home');

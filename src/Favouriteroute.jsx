@@ -22,9 +22,14 @@ export default function Favouriteroute() {
 
   const fetchFavourites = async () => {
     try {
+      const token = sessionStorage.getItem('token');
       const response = await axios.get(
         "https://se-term-project.onrender.com/api/favourite/list",
-        { withCredentials: true }
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
       );
       setFavourites(response.data);
     } catch (error) {
@@ -39,19 +44,24 @@ export default function Favouriteroute() {
 
   const deleteFavorites = async (itemId) => {
     try {
+      const token = sessionStorage.getItem('token');
       await axios.post(
         "https://se-term-project.onrender.com/api/favourite/delete",
         { itemId: itemId },
-        { withCredentials: true }
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
       );
       alert("Deleted from favorites!");
-      fetchFavourites();
-      // Optionally, refresh the data or update the UI to reflect the change
+      fetchFavourites(); // Refresh the data
     } catch (error) {
       console.error("Error deleting from favorites:", error);
       alert("Failed to delete from favorites.");
     }
   };
+
 
   return (
     <main className={base()}>
