@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { tv } from "tailwind-variants";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -46,8 +46,6 @@ export default function Register() {
         alert("Password and Confirm Password is mismatch")
       }
     } catch (error) {
-      // console.log("identifier : "+identifier)
-      // console.log("password : "+password)
       if (error.response) {
         // The server responded with a status code outside the 2xx range
         const errorMessage = error.response.data.message || "Wrong phone number/email";
@@ -91,15 +89,15 @@ export default function Register() {
               value={confirmPassword}
               func={(e) => setConfirmPassword(e.target.value)}
             />
-            <Button label="ลงชื่อเข้าใช้" type="submit" />
+            <Button label="ลงทะเบียน" type="submit" />
           </form>
 
           <div className="flex items-center py-4 mt-4">
-            <div className="flex-grow h-px bg-[#FF4E00]"></div>
-            <span className="flex-shrink text-sm text-[#FF4E00] px-4 italic font-light">
+            <div className="flex-grow h-px bg-primary"></div>
+            <span className="flex-shrink text-sm text-primary px-4 italic font-light">
               หากมีบัญชีแล้ว
             </span>
-            <div className="flex-grow h-px bg-[#FF4E00]"></div>
+            <div className="flex-grow h-px bg-primary"></div>
           </div>
           <div className="flex justify-center">
             <Link to="/">
