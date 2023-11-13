@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   useJsApiLoader,
   GoogleMap,
   Autocomplete,
   DirectionsRenderer,
+  TransitLayer,
 } from "@react-google-maps/api";
 import { Button } from "./components/Button";
 import { Link } from "react-router-dom";
@@ -11,13 +12,13 @@ import { tv } from "tailwind-variants";
 
 const MapPage = tv({
   slots: {
-    base: "relative h-screen overflow-hidden",
+    base: "relative",
     input: "w-40 rounded-md p-0.5 pl-1.5",
     newbutton: "border-2 border-black rounded-md p-0.5",
   },
 });
 
-const { base, input, newbutton } = MapPage(); 
+const { base, input, newbutton } = MapPage();
 
 const center = {
   lat: 13.739415037890979,
@@ -35,21 +36,75 @@ export default function Map() {
 
   const [, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
+  const [busStops, setBusStops] = useState([]);
 
   const originRef = useRef();
   const destiantionRef = useRef();
+  const transitLayerRef = useRef();
+
+  const onMapLoad = React.useCallback((map) => {
+    setMap(map);
+    transitLayerRef.current = new window.google.maps.TransitLayer();
+    transitLayerRef.current.setMap(map);
+  }, []);
+
+  // async function calculateRoute() {
+  //   if (originRef.current.value === "" || destiantionRef.current.value === "") {
+  //     return;
+  //   }
+  //   const directionsService = new window.google.maps.DirectionsService();
+  //   const results = await directionsService.route({
+  //     origin: originRef.current.value,
+  //     destination: destiantionRef.current.value,
+  //     travelMode: window.google.maps.TravelMode.DRIVING,
+  //   });
+  //   setDirectionsResponse(results);
+  // }
 
   async function calculateRoute() {
-    if (originRef.current.value === "" || destiantionRef.current.value === "") {
-      return;
+    try {
+      if (
+        originRef.current.value === "" ||
+        destiantionRef.current.value === ""
+      ) {
+        return;
+      }
+      const directionsService = new window.google.maps.DirectionsService();
+      const results = await directionsService.route({
+        origin: originRef.current.value,
+        destination: destiantionRef.current.value,
+        travelMode: window.google.maps.TravelMode.TRANSIT,
+      });
+
+      setDirectionsResponse(results);
+
+      // Extracting bus stops from the response
+      let busStops = [];
+      results.routes[0].legs.forEach((leg) => {
+        leg.steps.forEach((step) => {
+          if (
+            step.travel_mode === "TRANSIT" &&
+            step.transit.line.vehicle.type === "BUS"
+          ) {
+            // Push the departure stop's name to the busStops array
+            busStops.push(step.transit.departure_stop.name);
+            // Since the arrival stop of the last step will be the departure stop of the next transit step, we don't push it here to avoid duplicates
+            // Only push the arrival stop for the last transit step in the leg
+            if (
+              leg.steps.indexOf(step) === leg.steps.length - 1 ||
+              leg.steps[leg.steps.indexOf(step) + 1].travel_mode !== "TRANSIT"
+            ) {
+              busStops.push(step.transit.arrival_stop.name);
+            }
+          }
+        });
+      });
+
+      console.log(busStops);
+      setBusStops(busStops);
+    } catch (err) {
+      alert(err);
     }
-    const directionsService = new window.google.maps.DirectionsService();
-    const results = await directionsService.route({
-      origin: originRef.current.value,
-      destination: destiantionRef.current.value,
-      travelMode: window.google.maps.TravelMode.DRIVING,
-    });
-    setDirectionsResponse(results);
   }
 
   function clearRoute() {
@@ -124,11 +179,12 @@ export default function Map() {
             mapTypeControl: false,
             fullscreenControl: false,
           }}
-          onLoad={(map) => setMap(map)}
+          onLoad={onMapLoad}
         >
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
+          <TransitLayer onLoad={(tl) => (transitLayerRef.current = tl)} />
         </GoogleMap>
       </section>
     </main>
