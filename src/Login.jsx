@@ -76,11 +76,11 @@ export default function Login() {
           </form>
 
           <div className="flex items-center py-4 mt-4">
-            <div className="flex-grow h-px bg-[#FF4E00]"></div>
-            <span className="flex-shrink text-sm text-[#FF4E00] px-4 italic font-light">
+            <div className="flex-grow h-px bg-primary"></div>
+            <span className="flex-shrink text-sm text-primary px-4 italic font-light">
               หากไม่มีบัญชี
             </span>
-            <div className="flex-grow h-px bg-[#FF4E00]"></div>
+            <div className="flex-grow h-px bg-primary"></div>
           </div>
           <div className="flex justify-center">
             <Link to="/register">
