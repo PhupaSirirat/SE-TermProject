@@ -7,8 +7,8 @@ import { Button } from "./components/Button";
 
 const RegisterPage = tv({
   slots: {
-    base: "flex flex-col h-screen items-center pt-10 bg-[#fee4c8]",
-    headerText: "text-4xl font-bold mb-10",
+    base: "flex flex-col h-screen items-center pt-5",
+    headerText: "text-4xl font-bold mb-5",
   },
 });
 
@@ -64,7 +64,7 @@ export default function Register() {
   return (
     <main className={base()}>
       <h1 className={headerText()}>ลงทะเบียน</h1>
-      <div className="w-full h-full flex justify-center bg-white rounded-tl-2xl rounded-tr-2xl">
+      <div className="w-full h-full flex justify-center bg-white rounded-tl-3xl rounded-tr-3xl">
         <section className="w-4/5 py-6">
           <form className="flex flex-col" onSubmit={handleSubmit}>
             <InputForm
