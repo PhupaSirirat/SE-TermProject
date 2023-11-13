@@ -17,9 +17,9 @@ export default function Home() {
 
   const handleLogout = async () => {
     try {
-      await axios.post('https://se-term-project.onrender.com/api/users/logout', 
-      {},
-      { withCredentials: true });
+      await axios.post('https://se-term-project.onrender.com/api/users/logout',
+        {},
+        { withCredentials: true });
       navigate('/');
     } catch (error) {
       console.error('Logout failed', error);
@@ -31,25 +31,24 @@ export default function Home() {
     <main className={base()}>
       <h1 className={headerText()}>หน้าหลัก</h1>
       <section className="w-4/5 flex flex-col gap-10 items-center">
-        <Link to="/map" className="w-full">
+        <Link to="/map" className="w-full flex-grow">
           <Button label="กำหนดเส้นทาง" />
         </Link>
-        <Link to="/favouriteroute" className="w-full">
+        <Link to="/favouriteroute" className="w-full flex-grow">
           <Button label="เส้นทางที่บันทึก" />
         </Link>
-        <Link to="/history" className="w-full">
+        <Link to="/history" className="w-full flex-grow">
           <Button label="ประวัติการเดินทาง" />
         </Link>
-      </section>
+        <Link to="/">
+          <div className="mt-auto mb-10">
+            <Button
+              label="ออกจากระบบ"
+              func={handleLogout} />
 
-      <Link to="/">
-        <div className="mt-44">
-          <Button 
-            label="ออกจากระบบ" 
-            func = {handleLogout}/>
-            
-        </div>
-      </Link>
+          </div>
+        </Link>
+      </section>
     </main>
   );
 }
