@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { tv } from "tailwind-variants";
 
 const InputButton = tv({
@@ -11,9 +10,7 @@ const InputButton = tv({
 const { button } = InputButton();
 
 export function Button({ label, type, className, func }) {
-  // label -> string in the button
-  // type -> type of button
-  // className -> Can override the current button class
+  
   return (
     <>
       <button 
