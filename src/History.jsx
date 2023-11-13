@@ -51,8 +51,6 @@ export default function History() {
     }
   };
 
-  // second <tr> is placeholder used for layout development
-
   return (
     <main className={base()}>
       <h1 className={headerText()}>ประวัติเดินทาง</h1>
@@ -60,7 +58,7 @@ export default function History() {
         <section className="flex flex-col justify-between items-center w-100% space-x-4">
           <table className="w-full">
             <tbody>
-              
+
               {history.map((hist, index) => (
                 <tr key={index} className="flex items-center bg-white rounded-3xl shadow-lg p-2 my-2">
                   <td className="flex flex-grow justify-center items-center border-r-2 border-gray-200 font-semibold text-sm px-1 py-1">
@@ -84,6 +82,7 @@ export default function History() {
                 </tr>
               ))}
 
+              {/*
               <tr className="flex items-center bg-white rounded-3xl shadow-lg px-0.5 py-0.5 my-2">
                 <td className="flex flex-grow justify-center items-center border-r-2 border-gray-200 font-semibold text-sm pl-1 pr-2 py-1">
                   <div>
@@ -104,27 +103,7 @@ export default function History() {
                   />
                 </td>
               </tr>
-
-              <tr className="flex items-center bg-white rounded-3xl shadow-lg px-0.5 py-0.5 my-2">
-                <td className="flex flex-grow justify-center items-center border-r-2 border-gray-200 font-semibold text-sm pl-1 pr-2 py-1">
-                  <div>
-                    <div className="text-left border-b py-0.5">
-                      {"จาก : "}{"จุฬาลงกรมหาวิทยาลัย"}
-                    </div>
-                    <div className="text-left border-t py-0.5">
-                      {"ถึง : "}{"เตรียมอุดมศึกษา"}
-                    </div>
-                  </div>
-                </td>
-                <td className="flex-grow align-middle font-bold text-green-600 text-md text-center px-2">{"-"}{"100฿"}</td>
-                <td className="align-middle font-semibold text-sm text-center px-2">
-                  <Button
-                    label={"บันทึก"}
-                    className={"min-h-[3rem] text-sm rounded-full p-1"}
-                    func={() => addToFavorites(hist._id)}
-                  />
-                </td>
-              </tr>
+              */}
 
             </tbody>
           </table>
