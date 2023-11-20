@@ -4,7 +4,7 @@ import { Button } from "./Button";
 const tablerow = tv({
     slots: {
         base: "flex items-center bg-white rounded-3xl shadow-lg px-0.5 py-0.5 my-2",
-        fromtodiv: "flex flex-grow justify-center items-center border-r-2 border-gray-200 font-semibold text-sm pl-1 pr-2 py-1",
+        fromtodiv: "flex flex-grow justify-start items-center border-r-2 border-gray-200 font-semibold text-sm ml-1 pl-1 py-1",
         fromdiv: "text-left border-b py-0.5",
         todiv: "text-left border-t py-0.5",
         costdiv: "flex items-center justify-center font-bold text-green-600 text-md text-center pr-3",
