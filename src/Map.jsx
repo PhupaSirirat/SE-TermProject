@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import {
@@ -39,12 +40,11 @@ export default function Map() {
     libraries,
   });
 
+  const [showRoutes, setShowRoutes] = useState(true);
   const [, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [routes, setRoutes] = useState([]);
-
   const [shouldAutoSearch, setShouldAutoSearch] = useState(true);
-
   const [origin, setOrigin] = useState(autofillData?.from || "");
   const [destination, setDestination] = useState(autofillData?.to || "");
   const originRef = useRef(location.state?.from || null);
@@ -110,8 +110,8 @@ export default function Map() {
         const res = await axios.post(
           `https://se-term-project.onrender.com/api/history/add`,
           {
-            "from": originRef.current.value.toString().split(",")[0],
-            "to": destinationRef.current.value.toString().split(",")[0],
+            from: originRef.current.value.toString().split(",")[0],
+            to: destinationRef.current.value.toString().split(",")[0],
           },
           {
             headers: {
@@ -122,17 +122,20 @@ export default function Map() {
       } catch (err) {
         console.log(err);
       }
-      
     } catch (err) {
       alert(err);
     }
-  }
+  };
 
   function clearRoute() {
     setDirectionsResponse(null);
     originRef.current.value = "";
     destinationRef.current.value = "";
   }
+
+  const handleShowRoute = () => {
+    setShowRoutes(!showRoutes);
+  };
 
   return isLoaded ? (
     <main className={base()}>
@@ -141,16 +144,21 @@ export default function Map() {
       </Link>
       {routes.length > 0 && (
         <div className="absolute z-10 bottom-7 bg-white w-full border-4 p-2">
-          <section className="flex justify-between">
+          <section className="flex justify-between items-center">
             <span>Routes ({routes.length})</span>
-            <Button label={"Fav"} className={"w-1/3"} />
+            <Button
+              label={showRoutes ? "Close" : "Open"}
+              className={"w-20 px-1 py-1"}
+              func={handleShowRoute}
+            />
           </section>
           <section>
-            {routes.map((item) => (
-              <div key={item}>
-                {routes.indexOf(item) + 1}.{item}
-              </div>
-            ))}
+            {showRoutes &&
+              routes.map((item) => (
+                <div key={item}>
+                  {routes.indexOf(item) + 1}.{item}
+                </div>
+              ))}
           </section>
         </div>
       )}
