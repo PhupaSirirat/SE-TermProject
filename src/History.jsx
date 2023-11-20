@@ -74,13 +74,15 @@ export default function History() {
                 from={hist.from}
                 to={hist.to}
                 cost="5"
+                func={() => addToFavorites(hist._id)}
               />
               ))}
 
             </tbody>
           </table>
           <Link to={"/home"} className="my-5">
-            <Button label={"กลับไปหน้าหลัก"} />
+            <Button 
+              label={"กลับไปหน้าหลัก"} />
           </Link>
         </section>
       </div>
