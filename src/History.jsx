@@ -78,6 +78,13 @@ export default function History() {
               />
               ))}
 
+                <Tablerow
+                keyindex={100}
+                from={"Chulalongkorm"}
+                to={"Phayathai"}
+                cost="5"
+                func={() => addToFavorites(hist._id)}
+              />
             </tbody>
           </table>
           <Link to={"/home"} className="my-5">
