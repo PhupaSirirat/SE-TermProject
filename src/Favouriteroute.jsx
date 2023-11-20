@@ -7,8 +7,8 @@ import { Tablerow2 } from "./components/Table";
 
 const FavouriteroutePage = tv({
   slots: {
-    base: "flex flex-col h-screen items-center pt-20",
-    headerText: "text-3xl font-bold mb-10",
+    base: "flex flex-col h-screen items-center pt-5",
+    headerText: "text-4xl font-bold mb-5",
     button:
       "text-[#780000] font-bold px-6 py-2 rounded-md border border-solid border-orange-500 bg-white shadow-md hover:bg-gray-100 transition ease-in-out duration-300",
     span: "text-lg font-semibold",
@@ -87,22 +87,31 @@ export default function Favouriteroute() {
   return (
     <main className={base()}>
       <h1 className={headerText()}>เส้นทางที่บันทึก</h1>
-      <table className="w-full">
-        <tbody>
-          {favourites.map((favourite) => (
+      <section className="w-full flex flex-col justify-between items-center ">
+        <table className="w-full">
+          <tbody>
+            {favourites.map((favourite) => (
+              <Tablerow2
+                keyindex={favourite._id}
+                from={favourite.from}
+                to={favourite.to}
+                func={() => addToFavorites(hist._id)}
+                func2={() => deleteFavorites(favourite._id)}
+              />
+            ))}
             <Tablerow2
-              key={favourite._id}
-              from={favourite.from}
-              to={favourite.to}
-              func={() => addToMap(favourite._id)}
+              keyindex={100}
+              from={"chulalongkron"}
+              to={"phayathai"}
+              func={() => addToFavorites(hist._id)}
               func2={() => deleteFavorites(favourite._id)}
             />
-          ))}
-        </tbody>
-      </table>
-      <Link to={"/home"}>
-        <Button label={"กลับไปหน้าหลัก"} />
-      </Link>
+          </tbody>
+        </table>
+        <Link to={"/home"} className="fixed bottom-0 my-10">
+          <Button label={"กลับไปหน้าหลัก"} />
+        </Link>
+      </section>
     </main>
   );
 }
