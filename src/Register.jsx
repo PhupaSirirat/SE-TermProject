@@ -27,7 +27,7 @@ export default function Register() {
     try {
       if (password === confirmPassword) {
         const response = await axios.post(
-          "https://se-term-project.onrender.com/api/users/register",
+          `${import.meta.env.VITE_APP_API}` + "/users/register",
           {
             identifier,
             password,

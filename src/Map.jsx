@@ -98,17 +98,17 @@ export default function Map() {
 
       setRoutes(tmpList);
       console.log(
-        "Origin: " + originRef.current.value.toString().split(",")[0]
+        "Origin: " + originRef.current.value.toString().split(",")[0],
       );
       console.log(
-        "Destination: " + destinationRef.current.value.toString().split(",")[0]
+        "Destination: " + destinationRef.current.value.toString().split(",")[0],
       );
       console.log(routes);
 
       try {
         const token = sessionStorage.getItem("token");
         const res = await axios.post(
-          `https://se-term-project.onrender.com/api/history/add`,
+          `${import.meta.env.VITE_APP_API}` + `/history/add`,
           {
             from: originRef.current.value.toString().split(",")[0],
             to: destinationRef.current.value.toString().split(",")[0],
@@ -117,8 +117,11 @@ export default function Map() {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
+        if (res) {
+          console.log(res);
+        }
       } catch (err) {
         console.log(err);
       }
