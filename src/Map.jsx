@@ -44,8 +44,8 @@ export default function Map() {
 
   const [origin, setOrigin] = useState(autofillData?.from || "");
   const [destination, setDestination] = useState(autofillData?.to || "");
-  const originRef = useRef(location.state.from || null);
-  const destinationRef = useRef(location.state.to || null);
+  const originRef = useRef(location.state?.from || null);
+  const destinationRef = useRef(location.state?.to || null);
   const transitLayerRef = useRef();
 
   const onMapLoad = React.useCallback((map) => {
@@ -109,7 +109,6 @@ export default function Map() {
             },
           }
         );
-        console.log(res);
       } catch (err) {
         console.log(err);
       }
