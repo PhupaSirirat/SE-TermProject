@@ -38,7 +38,7 @@ export default function Login() {
         sessionStorage.setItem("token", token);
       }
 
-      alert("Login successful!");
+      // alert("Login successful!");
       navigate("/home");
     } catch (error) {
       // console.log("identifier : "+identifier)

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { tv } from "tailwind-variants";
 import { Button } from "./Button";
 
@@ -16,7 +17,7 @@ const tablerow = tv({
 
 const { base, fromtodiv, fromdiv, todiv, costdiv, buttondiv, buttondiv2, buttondiv3 } = tablerow();
 
-export function Tablerow({ keyindex, from, to, cost, func }) {
+export function Tablerow({keyindex, from, to, cost, func}) {
 
     return (
         <tr key={keyindex} className={base()}>
@@ -42,10 +43,10 @@ export function Tablerow({ keyindex, from, to, cost, func }) {
     );
 }
 
-export function Tablerow2({ keyindex, from, to, func, func2 }) {
+export function Tablerow2({key, from, to, func, func2}) {
 
     return (
-        <tr key={keyindex} className={base()}>
+        <tr key={key} className={base()}>
             <td className={fromtodiv()}>
                 <div>
                     <div className={fromdiv()}>

@@ -18,6 +18,7 @@ const FavouriteroutePage = tv({
 const { base, headerText, button, span } = FavouriteroutePage();
 
 export default function Favouriteroute() {
+  const navigate = useNavigate();
   const [favourites, setFavourites] = useState([]);
   // const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ export default function Favouriteroute() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
       setFavourites(response.data);
     } catch (error) {
@@ -43,6 +44,26 @@ export default function Favouriteroute() {
     fetchFavourites();
   }, []);
 
+  const addToMap = async (searchFavouriteId) => {
+    try {
+      const token = sessionStorage.getItem("token");
+      const res = await axios.post(
+        "https://se-term-project.onrender.com/api/favourite/tomap",
+        { searchFavouriteId: searchFavouriteId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      navigate("/map", { state: { from: res.data.from, to: res.data.to }});
+    } catch (error) {
+      console.error("Error going to map:", error);
+      alert("Failed to go to map.");
+    }
+  };
+
   const deleteFavorites = async (itemId) => {
     try {
       const token = sessionStorage.getItem("token");
@@ -53,9 +74,9 @@ export default function Favouriteroute() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
-      alert("Deleted from favorites!");
+      // alert("Deleted from favorites!");
       fetchFavourites(); // Refresh the data
     } catch (error) {
       console.error("Error deleting from favorites:", error);
