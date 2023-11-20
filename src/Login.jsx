@@ -17,7 +17,6 @@ export default function Login() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [, setCookies] = useCookies(["token"]);
   const { base, headerText } = LoginPage();
 
   const handleSubmit = async (event) => {

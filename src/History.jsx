@@ -69,7 +69,7 @@ export default function History() {
             <tbody>
               {history.map((hist, index) => (
                 <Tablerow
-                  keyindex={index}
+                  key={index}
                   from={hist.from}
                   to={hist.to}
                   cost="5"
