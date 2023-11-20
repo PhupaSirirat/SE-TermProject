@@ -19,13 +19,13 @@ export default function Home() {
     try {
       // Optional: Call the backend to handle server-side logout logic
       await axios.post(
-        "https://se-term-project.onrender.com/api/users/logout",
+        `${import.meta.env.VITE_APP_API}` + "/users/logout",
         {},
         {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
-        },
+        }
       );
       // Remove the token from localStorage
       sessionStorage.removeItem("token");

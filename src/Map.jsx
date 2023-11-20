@@ -91,7 +91,7 @@ export default function Map() {
       try {
         const token = sessionStorage.getItem("token");
         const res = await axios.post(
-          `https://se-term-project.onrender.com/api/history/add`,
+          `${import.meta.env.VITE_APP_API}`+`/history/add`,
           {
             "from": originRef.current.value.toString().split(",")[0],
             "to": destiantionRef.current.value.toString().split(",")[0],

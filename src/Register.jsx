@@ -27,7 +27,7 @@ export default function Register() {
     try {
       if (password === confirmPassword) {
         const response = await axios.post(
-          "https://se-term-project.onrender.com/api/users/register",
+          `${import.meta.env.VITE_APP_API}` + "/users/register",
           {
             identifier,
             password,
@@ -36,11 +36,13 @@ export default function Register() {
             headers: {
               "Content-Type": "application/json",
             },
-          },
+          }
         );
 
-        alert("Register successful!");
-        navigate("/");
+        if (response) {
+          alert("Register successful!");
+          navigate("/");
+        }
       } else {
         alert("Password and Confirm Password is mismatch");
       }

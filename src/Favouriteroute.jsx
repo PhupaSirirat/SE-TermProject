@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { tv } from "tailwind-variants";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { Button } from "./components/Button";
 
@@ -14,7 +14,7 @@ const FavouriteroutePage = tv({
   },
 });
 
-const { base, headerText, button, span } = FavouriteroutePage();
+const { base, headerText, button, } = FavouriteroutePage();
 
 export default function Favouriteroute() {
   const [favourites, setFavourites] = useState([]);
@@ -24,12 +24,12 @@ export default function Favouriteroute() {
     try {
       const token = sessionStorage.getItem("token");
       const response = await axios.get(
-        "https://se-term-project.onrender.com/api/favourite/list",
+        `${import.meta.env.VITE_APP_API}` + "/favourite/list",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
       setFavourites(response.data);
     } catch (error) {
@@ -46,13 +46,13 @@ export default function Favouriteroute() {
     try {
       const token = sessionStorage.getItem("token");
       await axios.post(
-        "https://se-term-project.onrender.com/api/favourite/delete",
+        `${import.meta.env.VITE_APP_API}` + "/favourite/delete",
         { itemId: itemId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
       alert("Deleted from favorites!");
       fetchFavourites(); // Refresh the data

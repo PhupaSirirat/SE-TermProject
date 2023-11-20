@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { tv } from "tailwind-variants";
 import { Link, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import axios from "axios";
 import { InputForm } from "./components/InputForm";
 import { Button } from "./components/Button";
@@ -24,7 +23,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://se-term-project.onrender.com/api/users/login",
+        `${import.meta.env.VITE_APP_API}`+"/users/login",
         {
           identifier,
           password,

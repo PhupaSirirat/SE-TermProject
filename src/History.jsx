@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { tv } from "tailwind-variants";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { Button } from "./components/Button";
 import { Tablerow } from "./components/Table";
@@ -22,12 +22,12 @@ export default function History() {
     try {
       const token = sessionStorage.getItem("token");
       const response = await axios.get(
-        "https://se-term-project.onrender.com/api/history/list",
+        `${import.meta.env.VITE_APP_API}` + "/history/list",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
       setHistory(response.data); // Assuming the response contains the history data
     } catch (error) {
@@ -44,13 +44,13 @@ export default function History() {
     try {
       const token = sessionStorage.getItem("token");
       await axios.post(
-        "https://se-term-project.onrender.com/api/history/addtofav",
+        `${import.meta.env.VITE_APP_API}` + "/history/addtofav",
         { searchHistoryId: searchHistoryId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
       alert("Added to favorites!");
       // Optionally, refresh the data or update the UI to reflect the change
