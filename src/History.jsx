@@ -76,7 +76,7 @@ export default function History() {
                   func={() => addToFavorites(hist._id)}
                 />
               ))}
-                <Tablerow
+              <Tablerow
                 keyindex={100}
                 from={"Chulalongkorn"}
                 to={"Phayathai"}
@@ -85,7 +85,7 @@ export default function History() {
               />
             </tbody>
           </table>
-          <Link to={"/home"} className="my-5">
+          <Link to={"/home"} className="fixed bottom-0 my-10">
             <Button label={"กลับไปหน้าหลัก"} />
           </Link>
         </section>
