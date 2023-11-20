@@ -131,6 +131,7 @@ export default function Map() {
     setDirectionsResponse(null);
     originRef.current.value = "";
     destinationRef.current.value = "";
+    setRoutes([]);
   }
 
   const handleShowRoute = () => {
