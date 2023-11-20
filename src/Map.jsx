@@ -10,6 +10,7 @@ import { Button } from "./components/Button";
 import { Link } from "react-router-dom";
 import { tv } from "tailwind-variants";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const MapPage = tv({
   slots: {
@@ -29,6 +30,8 @@ const center = {
 const libraries = ["places"];
 
 export default function Map() {
+  const location = useLocation();
+  const autofillData = location.state;
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: `${import.meta.env.VITE_APP_GOOGLE_API_KEY}`,
@@ -39,8 +42,10 @@ export default function Map() {
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [routes, setRoutes] = useState([]);
 
-  const originRef = useRef();
-  const destiantionRef = useRef();
+  const [origin, setOrigin] = useState(autofillData?.from || "");
+  const [destination, setDestination] = useState(autofillData?.to || "");
+  const originRef = useRef(location.state.from || null);
+  const destinationRef = useRef(location.state.to || null);
   const transitLayerRef = useRef();
 
   const onMapLoad = React.useCallback((map) => {
@@ -50,17 +55,19 @@ export default function Map() {
   }, []);
 
   async function calculateRoute() {
+    setOrigin(originRef.current.value);
+    setDestination(destinationRef.current.value);
     try {
       if (
         originRef.current.value === "" ||
-        destiantionRef.current.value === ""
+        destinationRef.current.value === ""
       ) {
         return;
       }
       const directionsService = new window.google.maps.DirectionsService();
       const results = await directionsService.route({
         origin: originRef.current.value,
-        destination: destiantionRef.current.value,
+        destination: destinationRef.current.value,
         travelMode: window.google.maps.TravelMode.TRANSIT,
         transitOptions: {
           modes: [window.google.maps.TransitMode.BUS],
@@ -84,7 +91,7 @@ export default function Map() {
         "Origin: " + originRef.current.value.toString().split(",")[0]
       );
       console.log(
-        "Destination: " + destiantionRef.current.value.toString().split(",")[0]
+        "Destination: " + destinationRef.current.value.toString().split(",")[0]
       );
       console.log(routes);
 
@@ -94,7 +101,7 @@ export default function Map() {
           `https://se-term-project.onrender.com/api/history/add`,
           {
             "from": originRef.current.value.toString().split(",")[0],
-            "to": destiantionRef.current.value.toString().split(",")[0],
+            "to": destinationRef.current.value.toString().split(",")[0],
           },
           {
             headers: {
@@ -115,7 +122,7 @@ export default function Map() {
   function clearRoute() {
     setDirectionsResponse(null);
     originRef.current.value = "";
-    destiantionRef.current.value = "";
+    destinationRef.current.value = "";
   }
 
   return isLoaded ? (
@@ -149,6 +156,8 @@ export default function Map() {
                   className={input()}
                   placeholder="From"
                   ref={originRef}
+                  value={origin}
+                  onChange={(e) => setOrigin(e.target.value)}
                 />
               </Autocomplete>
             </div>
@@ -159,7 +168,9 @@ export default function Map() {
                   name="To"
                   className={input()}
                   placeholder="To"
-                  ref={destiantionRef}
+                  ref={destinationRef}
+                  value={destination}
+                  onChange={(e) => setDestination(e.target.value)}
                 />
               </Autocomplete>
             </div>
