@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { tv } from "tailwind-variants";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,7 +15,7 @@ const FavouriteroutePage = tv({
   },
 });
 
-const { base, headerText, button, span } = FavouriteroutePage();
+const { base, headerText } = FavouriteroutePage();
 
 export default function Favouriteroute() {
   const navigate = useNavigate();
@@ -26,12 +26,12 @@ export default function Favouriteroute() {
     try {
       const token = sessionStorage.getItem("token");
       const response = await axios.get(
-        "https://se-term-project.onrender.com/api/favourite/list",
+        `${import.meta.env.VITE_APP_API}` + "/favourite/list",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       setFavourites(response.data);
     } catch (error) {
@@ -48,16 +48,16 @@ export default function Favouriteroute() {
     try {
       const token = sessionStorage.getItem("token");
       const res = await axios.post(
-        "https://se-term-project.onrender.com/api/favourite/tomap",
+        `${import.meta.env.VITE_APP_API}` + "/favourite/tomap",
         { searchFavouriteId: searchFavouriteId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
-      navigate("/map", { state: { from: res.data.from, to: res.data.to }});
+      navigate("/map", { state: { from: res.data.from, to: res.data.to } });
     } catch (error) {
       console.error("Error going to map:", error);
       alert("Failed to go to map.");
@@ -68,13 +68,13 @@ export default function Favouriteroute() {
     try {
       const token = sessionStorage.getItem("token");
       await axios.post(
-        "https://se-term-project.onrender.com/api/favourite/delete",
+        `${import.meta.env.VITE_APP_API}` + "/favourite/delete",
         { itemId: itemId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       // alert("Deleted from favorites!");
       fetchFavourites(); // Refresh the data
@@ -92,20 +92,13 @@ export default function Favouriteroute() {
           <tbody>
             {favourites.map((favourite) => (
               <Tablerow2
-                keyindex={favourite._id}
+                key={favourite._id}
                 from={favourite.from}
                 to={favourite.to}
-                func={() => addToFavorites(hist._id)}
+                func={() => addToMap(favourite._id)}
                 func2={() => deleteFavorites(favourite._id)}
               />
             ))}
-            <Tablerow2
-              keyindex={100}
-              from={"chulalongkron"}
-              to={"phayathai"}
-              func={() => addToFavorites(hist._id)}
-              func2={() => deleteFavorites(favourite._id)}
-            />
           </tbody>
         </table>
         <Link to={"/home"} className="fixed bottom-0 my-10">
