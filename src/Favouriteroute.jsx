@@ -76,7 +76,7 @@ export default function Favouriteroute() {
           },
         }
       );
-      alert("Deleted from favorites!");
+      // alert("Deleted from favorites!");
       fetchFavourites(); // Refresh the data
     } catch (error) {
       console.error("Error deleting from favorites:", error);
