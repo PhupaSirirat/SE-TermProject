@@ -114,7 +114,9 @@ export default function Map() {
           </section>
           <section>
             {busStops.map((item) => (
-              <div key={item}>{busStops.indexOf(item)+1}.{item}</div>
+              <div key={item}>
+                {busStops.indexOf(item) + 1}.{item}
+              </div>
             ))}
           </section>
         </div>
