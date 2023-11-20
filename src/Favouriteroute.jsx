@@ -42,6 +42,30 @@ export default function Favouriteroute() {
     fetchFavourites();
   }, []);
 
+  const addToMap = async (searchFavouriteId) => {
+
+    try {
+      const token = sessionStorage.getItem('token');
+      const res = await axios.post(
+        "https://se-term-project.onrender.com/api/favourite/tomap",
+        { searchFavouriteId: searchFavouriteId },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      );
+
+      console.log(res.data);
+
+
+    } catch (error) {
+      console.error("Error going to map:", error);
+      alert("Failed to go to map.");
+    }
+  };
+
+
   const deleteFavorites = async (itemId) => {
     try {
       const token = sessionStorage.getItem('token');
@@ -70,7 +94,12 @@ export default function Favouriteroute() {
         <section key={favourite._id} className="flex justify-center items-center w-4/5 space-x-4">
           <span className="text-lg font-semibold">{favourite.from}</span>
           <span className="text-lg font-semibold">{favourite.to}</span>{" "}
-          <button className={button()}>ใช้</button>
+          <button 
+            className={button()}
+            onClick={() => addToMap(favourite._id)}
+            >
+              ใช้
+              </button>
           <button
             className={button()}
             onClick={() => deleteFavorites(favourite._id)}
