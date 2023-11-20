@@ -18,18 +18,22 @@ export default function Home() {
   const handleLogout = async () => {
     try {
       // Optional: Call the backend to handle server-side logout logic
-      await axios.post('https://se-term-project.onrender.com/api/users/logout', {}, {
-        headers: {
-          'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-        }
-      });
+      await axios.post(
+        "https://se-term-project.onrender.com/api/users/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        },
+      );
       // Remove the token from localStorage
-      sessionStorage.removeItem('token');
-  
+      sessionStorage.removeItem("token");
+
       // Navigate to the home page or login page
-      navigate('/');
+      navigate("/");
     } catch (error) {
-      console.error('Logout failed', error);
+      console.error("Logout failed", error);
       // Handle error appropriately
     }
   };
@@ -49,10 +53,7 @@ export default function Home() {
         </Link>
         <Link to="/">
           <div className="mt-auto mb-10">
-            <Button
-              label="ออกจากระบบ"
-              func={handleLogout} />
-
+            <Button label="ออกจากระบบ" func={handleLogout} />
           </div>
         </Link>
       </section>

@@ -16,7 +16,6 @@ const tablerow = tv({
 
 const { base, fromtodiv, fromdiv, todiv, costdiv, buttondiv, buttondiv2, buttondiv3 } = tablerow();
 
-
 export function Tablerow({ keyindex, from, to, cost, func }) {
 
     return (

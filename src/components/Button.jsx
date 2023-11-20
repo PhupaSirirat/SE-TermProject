@@ -10,14 +10,13 @@ const InputButton = tv({
 const { button } = InputButton();
 
 export function Button({ label, type, className, func }) {
-  
   return (
     <>
-      <button 
-        type={type} 
-        className={button({class : `${className}`})} 
-        onClick={func}>
-          
+      <button
+        type={type}
+        className={button({ class: `${className}` })}
+        onClick={func}
+      >
         {label}
       </button>
     </>
