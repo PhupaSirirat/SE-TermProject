@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useEffect } from "react";
 import {
   useJsApiLoader,
   GoogleMap,
@@ -42,11 +43,20 @@ export default function Map() {
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [routes, setRoutes] = useState([]);
 
+  const [shouldAutoSearch, setShouldAutoSearch] = useState(true);
+
   const [origin, setOrigin] = useState(autofillData?.from || "");
   const [destination, setDestination] = useState(autofillData?.to || "");
   const originRef = useRef(location.state?.from || null);
   const destinationRef = useRef(location.state?.to || null);
   const transitLayerRef = useRef();
+
+  useEffect(() => {
+    if (shouldAutoSearch && origin && destination) {
+      calculateRoute();
+      setShouldAutoSearch(false); // Disable auto search after first invocation
+    }
+  }, [origin, destination, shouldAutoSearch]);
 
   const onMapLoad = React.useCallback((map) => {
     setMap(map);
@@ -54,7 +64,7 @@ export default function Map() {
     transitLayerRef.current.setMap(map);
   }, []);
 
-  async function calculateRoute() {
+  const calculateRoute = async () => {
     setOrigin(originRef.current.value);
     setDestination(destinationRef.current.value);
     try {
@@ -66,8 +76,8 @@ export default function Map() {
       }
       const directionsService = new window.google.maps.DirectionsService();
       const results = await directionsService.route({
-        origin: originRef.current.value,
-        destination: destinationRef.current.value,
+        origin: origin,
+        destination: destination,
         travelMode: window.google.maps.TravelMode.TRANSIT,
         transitOptions: {
           modes: [window.google.maps.TransitMode.BUS],
@@ -156,7 +166,10 @@ export default function Map() {
                   placeholder="From"
                   ref={originRef}
                   value={origin}
-                  onChange={(e) => setOrigin(e.target.value)}
+                  onChange={(e) => {
+                    setOrigin(e.target.value);
+                    setShouldAutoSearch(false); // Disable auto search when user types
+                  }}
                 />
               </Autocomplete>
             </div>
@@ -169,7 +182,10 @@ export default function Map() {
                   placeholder="To"
                   ref={destinationRef}
                   value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
+                  onChange={(e) => {
+                    setDestination(e.target.value);
+                    setShouldAutoSearch(false); // Disable auto search when user types
+                  }}
                 />
               </Autocomplete>
             </div>
