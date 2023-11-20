@@ -11,8 +11,7 @@ const inputForm = tv({
 const { base, input } = inputForm();
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
-export function InputForm({label, type, id, placeholder, hint, val, func}) {
-
+export function InputForm({ label, type, id, placeholder, hint, val, func }) {
   return (
     <>
       <div className={base()}>

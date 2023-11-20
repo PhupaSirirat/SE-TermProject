@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Login from './Login';
-import Register from './Register';
+import Login from "./Login";
+import Register from "./Register";
 import Home from "./Home";
 import Favouriteroute from "./Favouriteroute";
 import History from "./History";
@@ -21,16 +21,16 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/favouriteroute", 
-    element: <Favouriteroute />, 
+    path: "/favouriteroute",
+    element: <Favouriteroute />,
   },
   {
-    path: "/history", 
-    element: <History />, 
+    path: "/history",
+    element: <History />,
   },
   {
-    path: "/map", 
-    element: <Map />, 
+    path: "/map",
+    element: <Map />,
   },
 ]);
 

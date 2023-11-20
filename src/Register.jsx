@@ -36,19 +36,19 @@ export default function Register() {
             headers: {
               "Content-Type": "application/json",
             },
-          }
+          },
         );
 
         alert("Register successful!");
         navigate("/");
-      }
-      else {
-        alert("Password and Confirm Password is mismatch")
+      } else {
+        alert("Password and Confirm Password is mismatch");
       }
     } catch (error) {
       if (error.response) {
         // The server responded with a status code outside the 2xx range
-        const errorMessage = error.response.data.message || "Wrong phone number/email";
+        const errorMessage =
+          error.response.data.message || "Wrong phone number/email";
 
         alert(`Register failed: ${errorMessage}`);
       } else if (error.request) {

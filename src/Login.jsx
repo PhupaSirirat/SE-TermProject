@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { tv } from "tailwind-variants";
 import { Link, useNavigate } from "react-router-dom";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 import axios from "axios";
 import { InputForm } from "./components/InputForm";
 import { Button } from "./components/Button";
@@ -14,42 +14,46 @@ const LoginPage = tv({
 });
 
 export default function Login() {
-  const [identifier, setIdentifier] = useState('');
-  const [password, setPassword] = useState('');
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { base, headerText } = LoginPage();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    try {
-      const response = await axios.post('https://se-term-project.onrender.com/api/users/login', {
-        identifier,
-        password,
-      });
 
-      const token = response.headers['x-auth-token'];
-      
+    try {
+      const response = await axios.post(
+        "https://se-term-project.onrender.com/api/users/login",
+        {
+          identifier,
+          password,
+        },
+      );
+
+      const token = response.headers["x-auth-token"];
+
       if (token) {
         // Store the token in sessionStorage
-        sessionStorage.setItem('token', token);
+        sessionStorage.setItem("token", token);
       }
 
-      alert('Login successful!');
-      navigate('/home');
+      alert("Login successful!");
+      navigate("/home");
     } catch (error) {
       // console.log("identifier : "+identifier)
       // console.log("password : "+password)
       if (error.response) {
         // The server responded with a status code outside the 2xx range
-        const errorMessage = error.response.data.message || 'An unknown error occurred';
+        const errorMessage =
+          error.response.data.message || "An unknown error occurred";
         alert(`Login failed: ${errorMessage}`);
       } else if (error.request) {
         // The request was made, but no response was received
-        alert('Login failed: No response from server');
+        alert("Login failed: No response from server");
       } else {
         // An error occurred in setting up the request
-        alert('Login failed: Error in sending request');
+        alert("Login failed: Error in sending request");
       }
     }
   };
@@ -72,7 +76,8 @@ export default function Login() {
               type="password"
               id="password"
               value={password}
-              func={(e) => setPassword(e.target.value)} />
+              func={(e) => setPassword(e.target.value)}
+            />
             <Button label="ลงชื่อเข้าใช้" type="submit" />
           </form>
 

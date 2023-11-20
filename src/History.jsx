@@ -20,14 +20,14 @@ export default function History() {
 
   const fetchHistory = async () => {
     try {
-      const token = sessionStorage.getItem('token');
+      const token = sessionStorage.getItem("token");
       const response = await axios.get(
         "https://se-term-project.onrender.com/api/history/list",
         {
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        }
+            Authorization: `Bearer ${token}`,
+          },
+        },
       );
       setHistory(response.data); // Assuming the response contains the history data
     } catch (error) {
@@ -42,21 +42,21 @@ export default function History() {
 
   const addToFavorites = async (searchHistoryId) => {
     try {
-      const token = sessionStorage.getItem('token');
+      const token = sessionStorage.getItem("token");
       await axios.post(
         "https://se-term-project.onrender.com/api/history/addtofav",
         { searchHistoryId: searchHistoryId },
         {
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        }
+            Authorization: `Bearer ${token}`,
+          },
+        },
       );
-      alert('Added to favorites!');
+      alert("Added to favorites!");
       // Optionally, refresh the data or update the UI to reflect the change
     } catch (error) {
       console.error("Error adding to favorites:", error);
-      alert('Failed to add to favorites.');
+      alert("Failed to add to favorites.");
     }
   };
 
@@ -67,25 +67,22 @@ export default function History() {
         <section className="w-full flex flex-col justify-between items-center ">
           <table className="w-full">
             <tbody>
-
               {history.map((hist, index) => (
                 <Tablerow
-                keyindex={index}
-                from={hist.from}
-                to={hist.to}
-                cost="5"
-                func={() => addToFavorites(hist._id)}
-              />
+                  keyindex={index}
+                  from={hist.from}
+                  to={hist.to}
+                  cost="5"
+                  func={() => addToFavorites(hist._id)}
+                />
               ))}
-
             </tbody>
           </table>
           <Link to={"/home"} className="my-5">
-            <Button 
-              label={"กลับไปหน้าหลัก"} />
+            <Button label={"กลับไปหน้าหลัก"} />
           </Link>
         </section>
       </div>
-    </main >
+    </main>
   );
 }
