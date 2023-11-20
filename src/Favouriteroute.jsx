@@ -3,6 +3,7 @@ import { tv } from "tailwind-variants";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from "./components/Button";
+import { Tablerow2 } from "./components/Table";
 
 const FavouriteroutePage = tv({
   slots: {
@@ -22,14 +23,14 @@ export default function Favouriteroute() {
 
   const fetchFavourites = async () => {
     try {
-      const token = sessionStorage.getItem('token');
+      const token = sessionStorage.getItem("token");
       const response = await axios.get(
         "https://se-term-project.onrender.com/api/favourite/list",
         {
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        }
+            Authorization: `Bearer ${token}`,
+          },
+        },
       );
       setFavourites(response.data);
     } catch (error) {
@@ -68,15 +69,15 @@ export default function Favouriteroute() {
 
   const deleteFavorites = async (itemId) => {
     try {
-      const token = sessionStorage.getItem('token');
+      const token = sessionStorage.getItem("token");
       await axios.post(
         "https://se-term-project.onrender.com/api/favourite/delete",
         { itemId: itemId },
         {
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        }
+            Authorization: `Bearer ${token}`,
+          },
+        },
       );
       alert("Deleted from favorites!");
       fetchFavourites(); // Refresh the data
@@ -86,29 +87,22 @@ export default function Favouriteroute() {
     }
   };
 
-
   return (
     <main className={base()}>
       <h1 className={headerText()}>เส้นทางที่บันทึก</h1>
+      <table className="w-full">
+        <tbody>
       {favourites.map((favourite) => (
-        <section key={favourite._id} className="flex justify-center items-center w-4/5 space-x-4">
-          <span className="text-lg font-semibold">{favourite.from}</span>
-          <span className="text-lg font-semibold">{favourite.to}</span>{" "}
-          <button 
-            className={button()}
-            onClick={() => addToMap(favourite._id)}
-            >
-              ใช้
-              </button>
-          <button
-            className={button()}
-            onClick={() => deleteFavorites(favourite._id)}
-          >
-            ลบ
-          </button>
-        </section>
+        <Tablerow2
+        keyindex={favourite._id}
+        from={favourite.from}
+        to={favourite.to}
+        func={() => addToMap(favourite._id)}
+        func2={() => deleteFavorites(favourite._id)}
+      />
       ))}
-
+        </tbody>
+      </table>
       <Link to={"/home"}>
         <Button label={"กลับไปหน้าหลัก"} />
       </Link>
