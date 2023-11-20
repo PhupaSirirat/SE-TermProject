@@ -3,6 +3,7 @@ import { tv } from "tailwind-variants";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from "./components/Button";
+import { Tablerow2 } from "./components/Table";
 
 const FavouriteroutePage = tv({
   slots: {
@@ -65,23 +66,26 @@ export default function Favouriteroute() {
   return (
     <main className={base()}>
       <h1 className={headerText()}>เส้นทางที่บันทึก</h1>
+      <table className="w-full">
+        <tbody>
       {favourites.map((favourite) => (
-        <section
-          key={favourite._id}
-          className="flex justify-center items-center w-4/5 space-x-4"
-        >
-          <span className="text-lg font-semibold">{favourite.from}</span>
-          <span className="text-lg font-semibold">{favourite.to}</span>{" "}
-          <button className={button()}>ใช้</button>
-          <button
-            className={button()}
-            onClick={() => deleteFavorites(favourite._id)}
-          >
-            ลบ
-          </button>
-        </section>
+        <Tablerow2
+        keyindex={favourite._id}
+        from={favourite.from}
+        to={favourite.to}
+        func={() => addToFavorites(hist._id)}
+        func2={() => deleteFavorites(favourite._id)}
+      />
       ))}
-
+        <Tablerow2
+                keyindex={100}
+                from={"chulalongkron"}
+                to={"phayathai"}
+                func={() => addToFavorites(hist._id)}
+                func2={() => deleteFavorites(favourite._id)}
+              />
+        </tbody>
+      </table>
       <Link to={"/home"}>
         <Button label={"กลับไปหน้าหลัก"} />
       </Link>

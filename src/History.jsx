@@ -69,13 +69,20 @@ export default function History() {
             <tbody>
               {history.map((hist, index) => (
                 <Tablerow
-                  keyindex={index}
+                  key={index}
                   from={hist.from}
                   to={hist.to}
                   cost="5"
                   func={() => addToFavorites(hist._id)}
                 />
               ))}
+                <Tablerow
+                keyindex={100}
+                from={"Chulalongkorn"}
+                to={"Phayathai"}
+                cost="5"
+                func={() => addToFavorites(hist._id)}
+              />
             </tbody>
           </table>
           <Link to={"/home"} className="my-5">
