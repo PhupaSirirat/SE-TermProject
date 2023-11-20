@@ -14,7 +14,7 @@ const tablerow = tv({
 
 const { base, fromtodiv, fromdiv, todiv, costdiv, buttondiv } = tablerow();
 
-export function Tablerow({ keyindex, from, to, cost}) {
+export function Tablerow({ keyindex, from, to, cost, func}) {
 
     return (
         <tr key={keyindex} className={base()}>
@@ -33,7 +33,7 @@ export function Tablerow({ keyindex, from, to, cost}) {
             <Button
                     label={"บันทึก"}
                     className={"min-h-[3rem] text-sm rounded-full p-1"}
-                    func={() => addToFavorites(hist._id)}
+                    func={func}
                   />
             </td>
         </tr>
