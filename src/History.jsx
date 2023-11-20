@@ -76,10 +76,9 @@ export default function History() {
                   func={() => addToFavorites(hist._id)}
                 />
               ))}
-
                 <Tablerow
                 keyindex={100}
-                from={"Chulalongkorm"}
+                from={"Chulalongkorn"}
                 to={"Phayathai"}
                 cost="5"
                 func={() => addToFavorites(hist._id)}
